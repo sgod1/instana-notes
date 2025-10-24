@@ -25,7 +25,7 @@ A *change* has a start time and end time.<br/>
 An *issue* has a start time, duration, and end time. An issue can be closed manually, or automatically.<br/>
 An *incident* has a triggering event, duration, and end time. An incident is closed when all related issues are closed.<br/>
 
-*Change example*
+*Change example*<br/>
 Changes are created for *online*, *offline*, or *change detected* transitions.<br/>
 ```
 Change detected
