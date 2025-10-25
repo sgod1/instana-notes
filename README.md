@@ -217,18 +217,59 @@ for (slo: serviceLevelObjective) fire smart alert if threshold (bucket: {slo}, s
 
 **Automation**
 
-Enable Automation Framework<br/>
+Help SRE reduce MTTR by having runnable actions.<br/>
+Give SRE direction how to solve a problem.<br/>
+
+*Action catalog*: 2 type of actions - *manual* and *automatic*.<br/>
+
+*Manual steps* can be captured in an *action* and later used to create automation.<br/>
+
+*Automation actions* can be of different types:<br/>
+- ansible
+- script
+- webhook
+- github
+- gitlab
+- documentation link
+- jira task
+- manual
+
+*Policy* binds action to an *Event* or *Smart Alert*: when an event occurs an action is executed.<br/>
+Other policy criteria: run action automatically, run action on schedule, etc.<br/>
+
+*Matching event to an action*
+- event similarity: match an event against policy events. set policy action score based on event similarity.
+- nlp: match event against actions in the action catalog. calc action score.
+- success rate: an action is given a score based on sucess rate for the action in the past occurences of the event.
+- policy: event matches policy trigger. policy is listed in 'recommeded actions' with high score.
+- turbonomic: if the event entity has turbonomic actions linked to it, these actions are recommended based on the nlp score.
+
+Action scores are classified into *low/medium/high*.<br/>
+*Recommended actions* include policies for the event, and actions with *medium* and *high* scores.<br/>
+
+*Recommended actions*
+When event occurance matches conditions in policy trigger, the policy is listed in *recommended actions*<br/>
+Policies in *recommended actions* are listed first, followed by other recommendations based on the events similarity score.<br/>
+
+
+*AI Actions*<br/>
+AI actions are genereted offline from Instana events. 
+Taking event data asking watsonx to help with the script, then take this script and use it.
+
+
+*Prerequisites to enable Automation Framework*<br/>
+
+Enable actions feature.<br/>
+
 ```
-...
 featureFlags:
   - name:  feature.automation.enabled
     enabled: true
-...
 ```
 
 Enable action sensors to match action types<br/>
 
-Action Script sensor:<br/>
+*Action Script* sensor:<br/>
 ```
 com.instana.plugin.action.script:
   enabled: true # by default is false
@@ -240,7 +281,7 @@ com.instana.plugin.action.script:
   runAs: user
 
   # required for Windows
-  runAsUserPassword: password
+  runAsUserPassword:
     configuration_from:
       type: vault
       secret_key:
@@ -250,58 +291,42 @@ com.instana.plugin.action.script:
   chrootEnabled: false
 ```
 
-Additional requirements:
+Additional Action Script for Windows requirements:
 - agent is not a Windows service
 - powershell 7.4 or later
 - set runAsUserPassword
-- runAs user no permissions to agent install folder
+- runAs user granted no permissions to agent install folder
 
 
-*Matching event to an action*
-- event similarity: match an event against policy events. set policy action score based on event similarity.
-- nlp: match event against actions in the action catalog. calc action score.
-- success rate: an action is given a score based on sucess rate for the action in the past occurences of the event.
-- policy: event matches policy trigger. policy is listed in 'recommeded actions' with high score.
-- turbonomic: if the event entity has turbonomic actions linked to it, these actions are recommended based on the nlp score.
+*Examples*<br/>
 
-Action scores are classified into low/medium/high.<br/>
-Recommended actions include policies for the event, and actions with *medium* and *high* scores.<br/>
+*Script Action*<br/>
 
-For the incident, lookup recommended actions from the triggering event, or probable root cause.<br/>
+*Action Script* sensor runs *Script Actions* on the *target agent.*<br/>
 
-*intellegent remidiation with watsonx*
-Use gen ai to create new actions for the event.<br/>
-Event details is llm prompt.<br/>
+On Windows You can run only *Windows batch scripts*, *PowerShell*, *VBScript*, and *Python* scripts.<br/>
 
-There are many types of actions...<br/>
-
-We'll use example of a script action.<br/>
 Script action parameters can be static or dynamic.<br/>
 
 The values of static parameters are assigned at the time of parameter definition.<br/>
 
 The values of dynamic parameters are based on tags.<br/>
-Eg: We can assign host.fqdn tag to script parameter to represent a host name.<br/>
+Eg: We can assign *host.fqdn* tag to script parameter to represent a host name.<br/>
 
-As an example, we will create 'Must Gather' script action for Business Automation Workflow.<br/>
-
-*Policy: Linking actions to smart alerts*
-Policies link Smart Alerts to actions.<br/>
-
-There are 2 types of policies: user initiated and automatic.<br/>
-
-User initiated policies are run manually by the user.<br/>
-
-For automatic policies, action scope is determined from the scope of a firing smart alert.<br/>
-Automatic action scope can be restricted to the subset of the event scope by dynamic focus query.<br/>
-
-When event occurance matches conditions in policy trigger, the policy is listed in *recommended actions*<br/>
-
-*Recommended actions*
-Policies in *recommended actions* are listed first, followed by other recommendations based on the events similarity score.<br/>
+Run greeting from windows batch script.<br/>
+```
+echo "hello from %1"
+```
 
 
 **Synthetic Monitoring**
+
+*enable feature flag*<br/>
+```
+featureFlags:
+    - name: feature.synthetics.enabled
+      enabled: true
+```
 
 *POP* is a runtime to host synthetic tests. *POP* (Point of Presense) represents remote user location.<br/>
 
@@ -361,7 +386,7 @@ Opentelemetry logs require open telemetry contrib collector.
 Logs smart alerts
 
 
-*logs*
+*Logs*
 ```
 using Instana, logging
 https://www.ibm.com/docs/en/instana-observability/1.0.306?topic=instana-logging
@@ -468,39 +493,5 @@ service:
 *start otel collector*
 ```
 /otelcol-contrib --config=./otel-config.yaml
-```
-
-*Automation*
-enable action sensors
-link actions to events | or smart alerts. create policy to configure this association.
-run an action from event instance
-link event (and action) to smart alert
-
-
-enable actions feature
-
-```
-featureFlags:
-  - name:  feature.automation.enabled
-    enabled: true
-```
-
-
-```
-com.instana.plugin.action.http:
-  enabled: true # by default is false
-  maxConcurrentActions: 10
-  defaultTimeout: 10
-```
-
-
-*Synthetic monitoring*
-
-enable feature flag
-
-```
-featureFlags:
-    - name: feature.synthetics.enabled
-      enabled: true
 ```
 
