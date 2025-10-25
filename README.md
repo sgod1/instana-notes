@@ -9,11 +9,11 @@ Topics:
 **Events, Alerts, and Smart Alerts**
 
 Instana defines almost 500 built-in events that can be fired by Instana sensors.</br>
-Events represent curated knowledge catpured in Instana.<br/>
+Events represent curated knowledge captured in Instana.<br/>
 
 Set of events is extensible with custom events.<br/>
 
-Events types: Change, Issue, or Incident.<br/>
+Events types: Change, Issue, Incident.<br/>
 
 *Changes* are created for `online/offline`, or *change detected* transitions.<br/>
 *Issues* are created if entity is `unhealthy`. All issues are independent from one another.<br/>
@@ -137,23 +137,40 @@ Application Smart Alerts support different scenarios (blueprints):
 
 *Application Smart Alerts* can be fired per application, per service, or per endpoint in the application.<br/>
 
-*Examples*
+*Static Threshold*<br/>
+*Static Thresholds do not change after Smart Alert is created*.<br/>
+
+The threshold itself can be a simple constant value, or<br/>
+can account for seasonal variations that occured in the past at the time of Smart Alert creation.<br/>
+
+Seasonal threshold is *a lookup table for every point in time of the day or week* that is precompiled once based on historical data.<br/>
+
+Historic data availability requirements for *Static Threshold*:<br/>
+For *daily seasonality* at least 5 to 7 days of data<br/>
+For *weekly seasonality* at least 2 weeks of data<br/>
+
+*Adaptive Threshold*<br/>
+Adaptive threshold continuosly accounts for seasonal changes (daily, weekly) to the underlying metric.<br/>
+Historic data availablity requirements for *Adaptive Threshold*: At least 14 days of data is required.<br/>
+
+*Examples*<br/>
 
 Slow calls, static threshold.<br/>
 ```
 for (a: application, a="baw", bpm.activity_name="hello") fire smart alert if threshold (mean(bucket: {all s in a}, a.latency over 10 mins)) < 10 ms is false for 30 mins or more
 ```
 
-slow calls, threshold over static daily sesonality.<br/>
-By how many much *latency mean over 10 mins* exceeds *latency static daily seasonality* when measured in number of std deviations.<br/>
+Slow calls, threshold over static daily seasonality.<br/>
+
+By how many much *mean latency over 10 mins* exceeds *static daily seasonality* measured in number of std deviations.<br/>
 ```
-for (a: application, a="baw", bpm.activity_name="hello") fire smart alert if threshold (mean(bucket: {all s in a}, a.latency over 10 min)) >= (latency_static_daily_seasonality by 5 std deviations) is false for 30 mins or more
+for (a: application, a="baw", bpm.activity_name="hello") fire smart alert if threshold (mean(bucket: {all s in a}, a.latency over 10 min)) >= (static_daily_seasonality + 3 std deviations) is true for 30 mins or more
 ```
 
 Slow calls, adaptive threshold.<br/>
-By how many much *latency mean over 10 mins* exceeds *latency adaptive threshold* when measured in number of std deviations.<br/>
+By how much *mean latency over 10 mins* exceeds *adaptive threshold* measured in number of std deviations.<br/>
 ```
-for (a: application, a="baw", bpm.activity_name="hello") fire smart alert if threshold (mean(bucket: {all s in a}, a.latency over 10 min)) >= (latency_adaptive_threshold by 5 std deviations) is false for 30 mins or more
+for (a: application, a="baw", bpm.activity_name="hello") fire smart alert if threshold (mean(bucket: {all s in a}, a.latency over 10 min)) >= (adaptive_threshold + 3 std deviations) is true for 30 mins or more
 ```
 
 
