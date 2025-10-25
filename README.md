@@ -150,8 +150,8 @@ For *daily seasonality* at least 5 to 7 days of data<br/>
 For *weekly seasonality* at least 2 weeks of data<br/>
 
 *Adaptive Threshold*<br/>
-Adaptive threshold continuosly accounts for seasonal changes (daily, weekly) to the underlying metric.<br/>
-Historic data availablity requirements for *Adaptive Threshold*: At least 14 days of data is required.<br/>
+Adaptive threshold continuously accounts for seasonal changes (daily, weekly) to the underlying metric.<br/>
+Historic data availability requirements for *Adaptive Threshold*: At least 14 days of data is required.<br/>
 
 *Examples*<br/>
 
