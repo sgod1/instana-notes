@@ -388,12 +388,12 @@ Opentelemetry logs require open telemetry contrib collector.
 [Collecting logs with Opentelemetry](https://www.ibm.com/docs/en/instana-observability/1.0.306?topic=logs-collecting-opentelemetry)
 
 
-Download opentelemetry contrib collector for linux:<br/>
+[Download opentelemetry contrib collector for linux](https://github.com/open-telemetry/opentelemetry-collector-releases/releases/download/v0.136.0/otelcol-contrib_0.136.0_linux_amd64.tar.gz)
 ```
 https://github.com/open-telemetry/opentelemetry-collector-releases/releases/download/v0.136.0/otelcol-contrib_0.136.0_linux_amd64.tar.gz
 ```
 
-Download opentelemetry contrib collector for windows:<br/>
+[Download opentelemetry contrib collector for windows](https://github.com/open-telemetry/opentelemetry-collector-releases/releases/download/v0.136.0/otelcol-contrib_0.136.0_windows_amd64.tar.gz)
 ```
 https://github.com/open-telemetry/opentelemetry-collector-releases/releases/download/v0.136.0/otelcol-contrib_0.136.0_windows_amd64.tar.gz
 ```
@@ -404,6 +404,10 @@ Reference:</br>
 
 [Windows Event Log Receiver](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/windowseventlogreceiver)
 [Filelog Receiver](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/filelogreceiver)
+
+[Filtering OpenTelemetry Logs](https://www.ibm.com/docs/en/instana-observability/1.0.306?topic=logs-filtering-opentelemetry)
+[OpenTelemetry loggimg best practices](https://www.ibm.com/docs/en/instana-observability/1.0.306?topic=logs-opentelemetry-logging-best-practices)
+
 
 *collector configuration*<br/>
 ```
