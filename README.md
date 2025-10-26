@@ -385,7 +385,7 @@ Traces and calls are enhanced with log messages<br/>
 Opentelemetry logs require open telemetry contrib collector.
 
 *Opentelemetry contrib collector*
-[instana logging use](https://www.ibm.com/docs/en/instana-observability/1.0.306?topic=logs-collecting-opentelemetry)
+[Collecting logs with Opentelemetry](https://www.ibm.com/docs/en/instana-observability/1.0.306?topic=logs-collecting-opentelemetry)
 
 
 Download opentelemetry contrib collector for linux:<br/>
@@ -397,6 +397,13 @@ Download opentelemetry contrib collector for windows:<br/>
 ```
 https://github.com/open-telemetry/opentelemetry-collector-releases/releases/download/v0.136.0/otelcol-contrib_0.136.0_windows_amd64.tar.gz
 ```
+
+Reference:</br>
+[Collecting Windows Event Logs with OpenTelemetry](https://www.ibm.com/docs/en/instana-observability/1.0.306?topic=opentelemetry-collecting-windows-event-logs)
+[Collecting Linux system logs with OpenTelemetry](https://www.ibm.com/docs/en/instana-observability/1.0.306?topic=opentelemetry-collecting-linux-system-logs)
+
+[Windows Event Log Receiver](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/windowseventlogreceiver)
+[Filelog Receiver](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/filelogreceiver)
 
 *collector configuration*<br/>
 ```
