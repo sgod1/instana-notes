@@ -369,63 +369,36 @@ Schedule test for execution.<br/>
 Configure *Smart Alerts* on Synthetic Test execution results.<br/>
 For *Smart Alert* configure test, scope, how many times a test should fail per location before alerting, alert channel, and properties.<br/>
 
-*Logs in Context*
+
+**Logs in Context**
 
 Logs:
-- captured by the tracers, container sensors, level >= warn
+- captured by the tracers, container sensors, *level >= warn*
 - ingested with open telemetry
 - tracing sdk
 
-logs are correlated with traces and metrics (show)
-traces and calls are enhanced with log messages (show)
+Logs are correlated with traces and metrics<br/>
+Traces and calls are enhanced with log messages<br/>
 
 *Opentelemetry logs*
 
 Opentelemetry logs require open telemetry contrib collector.
 
-Logs smart alerts
-
-
-*Logs*
-```
-using Instana, logging
-https://www.ibm.com/docs/en/instana-observability/1.0.306?topic=instana-logging
-```
-
-*mutliline log messages*
-*stack traces*
-*custom dashboards*
-
-*opentelemetry semantics conventions for logs*
-
-*Opentelemetry collector*
+*Opentelemetry contrib collector*
 [instana logging use](https://www.ibm.com/docs/en/instana-observability/1.0.306?topic=logs-collecting-opentelemetry)
 
-```
-#!/bin/bash
 
-download="https://github.com/open-telemetry/opentelemetry-collector-releases/releases/download"
-
-# min version: v0.110.0
-version="0.136.0"
-
-os="linux"|"windows"
-arch="amd64"
-
-coltar="otelcol-contrib_${version}_${os}_${arch}.tar.gz"
-
-wget ${download}/v${version}/${coltar}
-```
-
-```
-https://github.com/open-telemetry/opentelemetry-collector-releases/releases/download/v0.136.0/otelcol-contrib_0.136.0_windows_amd64.tar.gz
-```
-
+Download opentelemetry contrib collector for linux:<br/>
 ```
 https://github.com/open-telemetry/opentelemetry-collector-releases/releases/download/v0.136.0/otelcol-contrib_0.136.0_linux_amd64.tar.gz
 ```
 
-*collector configuration*
+Download opentelemetry contrib collector for windows:<br/>
+```
+https://github.com/open-telemetry/opentelemetry-collector-releases/releases/download/v0.136.0/otelcol-contrib_0.136.0_windows_amd64.tar.gz
+```
+
+*collector configuration*<br/>
 ```
 receivers:
   ## [REQUIRED] The filelog receiver will collect logs written to file by a process
@@ -488,7 +461,6 @@ service:
       exporters: [otlp/instanaAgent]
 
 ```
-
 
 *start otel collector*
 ```
