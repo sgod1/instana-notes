@@ -400,9 +400,11 @@ https://github.com/open-telemetry/opentelemetry-collector-releases/releases/down
 
 Reference:</br>
 [Collecting Windows Event Logs with OpenTelemetry](https://www.ibm.com/docs/en/instana-observability/1.0.306?topic=opentelemetry-collecting-windows-event-logs)
+
 [Collecting Linux system logs with OpenTelemetry](https://www.ibm.com/docs/en/instana-observability/1.0.306?topic=opentelemetry-collecting-linux-system-logs)
 
 [Windows Event Log Receiver](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/windowseventlogreceiver)
+
 [Filelog Receiver](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/filelogreceiver)
 
 [Filtering OpenTelemetry Logs](https://www.ibm.com/docs/en/instana-observability/1.0.306?topic=logs-filtering-opentelemetry)
