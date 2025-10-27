@@ -408,6 +408,7 @@ Reference:</br>
 [Filelog Receiver](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/filelogreceiver)
 
 [Filtering OpenTelemetry Logs](https://www.ibm.com/docs/en/instana-observability/1.0.306?topic=logs-filtering-opentelemetry)
+
 [OpenTelemetry loggimg best practices](https://www.ibm.com/docs/en/instana-observability/1.0.306?topic=logs-opentelemetry-logging-best-practices)
 
 
