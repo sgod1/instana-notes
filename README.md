@@ -382,6 +382,8 @@ Traces and calls are enhanced with log messages<br/>
 
 *Opentelemetry logs*
 
+[Sending Opentelemetry data to Instana](https://www.ibm.com/docs/en/instana-observability/1.0.307?topic=opentelemetry-sending-data-instana)
+
 Opentelemetry logs require open telemetry contrib collector.
 
 *Opentelemetry contrib collector*
